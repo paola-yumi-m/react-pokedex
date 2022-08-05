@@ -10,7 +10,7 @@ export default function App() {
 
     useEffect(() => {
         const getData = async () => {
-            for (let id = 895; id <= pokemonNumber; id++) {
+            for (let id = 1; id <= pokemonNumber; id++) {
                 try {
                     let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
                     const response = await fetch(url);
