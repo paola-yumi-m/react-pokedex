@@ -26,7 +26,7 @@ export const Pokemon = ({ data }) => {
 
     return (
         <div style={bodyStyle}>
-            <h1 style={h1Style}>POKEDEX</h1>
+            <h1 style={h1Style}>My PokéDex!</h1>
             <div style={gridStyle}>
                 {getPokemons()}
             </div>

@@ -11,7 +11,8 @@ export const noImgStyle = {
 
 export const h1Style = {
     fontSize: '60px',
-    color: '#684ca8',
+    color: '#041e91',
+    letterSpacing: '0.2rem',
     margin: '10px 0'
 };
 
