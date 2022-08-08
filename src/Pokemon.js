@@ -1,9 +1,6 @@
 import React from 'react';
 import img from './img/nopokemon.jpg';
-import { imgStyle, idStyle, imgContainerStyle,
-    cardStyle, nameStyle, typeStyle,
-    bodyStyle, gridStyle, h1Style,
-    noImgStyle } from "./style";
+import './Pokemon.css';
 
 export const Pokemon = ({ data }) => {
     const getPokemons = () => {
@@ -13,21 +10,21 @@ export const Pokemon = ({ data }) => {
     const getData = (pokemon, id) => {
         const pokemonSrc = pokemon.sprites.other.home.front_default;
         return (
-            <div style={cardStyle}>
-                <div style={imgContainerStyle}>
-                    {pokemonSrc ? <img src={pokemonSrc} style={imgStyle} /> : <div style={noImgStyle}><p>?</p></div>}
+            <div className='card' >
+                <div className='img-container'>
+                    {pokemonSrc ? <img src={pokemonSrc} className='img' /> : <div className='no-img'><p>?</p></div>}
                 </div>
-                <div style={idStyle} ><p>{id + 1}</p></div>
-                <p style={nameStyle}>{pokemon.name}</p>
-                <p style={typeStyle}>Type: {pokemon.types[0].type.name}</p>
+                <div className='id' ><p>{id + 1}</p></div>
+                <p className='name'>{pokemon.name}</p>
+                <p className='type'>Type: {pokemon.types[0].type.name}</p>
             </div>
             );
     }
 
     return (
-        <div style={bodyStyle}>
-            <h1 style={h1Style}>My PokéDex!</h1>
-            <div style={gridStyle}>
+        <div className='body'>
+            <h1>My PokéDex!</h1>
+            <div className='grid'>
                 {getPokemons()}
             </div>
         </div>
