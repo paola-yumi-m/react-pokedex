@@ -2,6 +2,7 @@ import React from 'react';
 import { GetData } from './GetData';
 import { useState, useEffect } from "react";
 import { ShowCard } from "./ShowCard";
+import { PokemonSelector } from "./PokemonSelector";
 
 export default function App() {
     const [ data, setData ] = useState([]);
@@ -46,7 +47,9 @@ export default function App() {
     }
 
     return (
-        <div>
+        <div className='body'>
+            <h1>My PokéDex!</h1>
+            <PokemonSelector />
             <GetData data={data} getPokemonId={getPokemonId}/>
             {show ? <ShowCard pokemonId={selected} data={data} hideCard={hideCard} /> : <p></p>}
         </div>
