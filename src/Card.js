@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Card = ({ pokemonSrc, pokemon, getPokemonId }) => {
+export const Card = ({ pokemonSrc, pokemon, getPokemonId, getTypes }) => {
 
     function handleClick(e) {
         getPokemonId(e.currentTarget.id);
@@ -13,7 +13,12 @@ export const Card = ({ pokemonSrc, pokemon, getPokemonId }) => {
             </div>
             <div className='id' ><p>{pokemon.id}</p></div>
             <p className='name'>{pokemon.name}</p>
-            <p className='type'>Type: {pokemon.types[0].type.name}</p>
+            <div className='list-container'>
+                <p className='list-title'>Type:</p>
+                <ul className='ul-items'>
+                    {getTypes(pokemon)}
+                </ul>
+            </div>
         </div>
     );
 }
