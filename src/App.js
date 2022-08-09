@@ -10,7 +10,7 @@ export default function App() {
     const [ loading, setLoading ] = useState(true);
     const [ selected, setSelected ] = useState(1);
     const [ show, setShow ] = useState(false);
-    const pokemonNumber = 10;
+    const pokemonNumber = 905; //905
 
     useEffect(() => {
         const getData = async () => {
@@ -49,9 +49,9 @@ export default function App() {
     return (
         <div className='body'>
             <h1>My PokéDex!</h1>
-            <PokemonSelector />
+            <PokemonSelector data={data} getPokemonId={getPokemonId} />
             <GetData data={data} getPokemonId={getPokemonId}/>
-            {show ? <ShowCard pokemonId={selected} data={data} hideCard={hideCard} /> : <p></p>}
+            {show && selected > 0 ? <ShowCard pokemonId={selected} data={data} hideCard={hideCard} /> : <p></p>}
         </div>
 )
 }
