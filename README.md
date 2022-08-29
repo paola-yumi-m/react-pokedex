@@ -10,6 +10,7 @@ This project implements the following features:
 
 ## These are some preview images of the final project:
 ![Overview](./preview/overview.png)
+
 ![Card](./preview/card.png)
 
-## [Video preview](https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6962792059661377536)
+**[Video preview](https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6962792059661377536)**
