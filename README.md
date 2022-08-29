@@ -9,3 +9,5 @@ This project implements the following features:
 - Select a specific Pokémon and open its card;
 
 ## These are some previews of the final project:
+
+<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6962792059661377536" height="560" width="504" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
