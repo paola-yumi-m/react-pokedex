@@ -1,4 +1,4 @@
-# Pokedex
+# Pokédex Project
 
 ## This is a project made using React, which aims to create a Pokédex, getting data from the [API](https://documenter.getpostman.com/view/10670805/SzS2xToN).
 
@@ -8,6 +8,8 @@ This project implements the following features:
 - Open the card and show more information;
 - Select a specific Pokémon and open its card;
 
-## These are some previews of the final project:
+## These are some preview images of the final project:
+![Overview](./preview/overview.png)
+![Card](./preview/card.png)
 
-### [Video](https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6962792059661377536)
+## [Video preview](https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6962792059661377536)
