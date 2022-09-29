@@ -1,6 +1,6 @@
 import React from 'react';
-import './styles.css';
-import { Card } from "./Card";
+import '../styles.css';
+import { Card } from "../card/Card";
 
 export const GetData = ({ data, getPokemonId, getTypes }) => {
     const getPokemons = () => {
