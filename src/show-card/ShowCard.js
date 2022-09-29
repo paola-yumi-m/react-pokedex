@@ -16,7 +16,7 @@ export const ShowCard = ({ data, pokemonId, hideCard, getTypes }) => {
             <div className='show-card' id={pokemonId} >
                 <button className='exit-button' onClick={handleClick}>X</button>
                 <div className='img-container' >
-                    {pokemonSrc ? <img src={pokemonSrc} className='img' /> : <div className='no-img'><p>?</p></div>}
+                    {pokemonSrc ? <img src={pokemonSrc} className='img' alt='a pokemon' /> : <div className='no-img'><p>?</p></div>}
                 </div>
                 <div className='id' ><p>{pokemon.id}</p></div>
                 <p className='name'>{pokemon.name}</p>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { GetData } from './GetData';
+import { GetData } from './get-data/GetData';
 import { useState, useEffect } from "react";
-import { ShowCard } from "./ShowCard";
-import { PokemonSelector } from "./PokemonSelector";
+import { ShowCard } from "./show-card/ShowCard";
+import { PokemonSelector } from "./pokemon-selector/PokemonSelector";
 
 export default function App() {
     const [ data, setData ] = useState([]);
@@ -10,7 +10,7 @@ export default function App() {
     const [ loading, setLoading ] = useState(true);
     const [ selected, setSelected ] = useState(1);
     const [ show, setShow ] = useState(false);
-    const pokemonNumber = 10; //905
+    const pokemonNumber = 10    ; //905
 
     useEffect(() => {
         const getData = async () => {
