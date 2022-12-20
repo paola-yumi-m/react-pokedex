@@ -4,13 +4,13 @@ import { Card } from "../Card/Card";
 
 export const GetData = ({ data, getPokemonId, getTypes }) => {
     const getPokemons = () => {
-        return data.map((pokemon) => getData(pokemon));
+        return data.map((pokemon, key) => getData(pokemon, key));
     }
 
-    const getData = (pokemon) => {
+    const getData = (pokemon, key) => {
         const pokemonSrc = pokemon.sprites.other.home.front_default;
         return (
-            <Card pokemonSrc={pokemonSrc} pokemon={pokemon} getPokemonId={getPokemonId} getTypes={getTypes} />
+            <Card key={key} pokemonSrc={pokemonSrc} pokemon={pokemon} getPokemonId={getPokemonId} getTypes={getTypes} />
             );
     }
 

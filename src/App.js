@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetData } from './get-data/GetData';
+import { GetData } from './GetData/GetData';
 import { useState, useEffect } from "react";
 import { ShowCard } from "./show-card/ShowCard";
 import { PokemonSelector } from "./pokemon-selector/PokemonSelector";
