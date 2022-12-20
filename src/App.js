@@ -2,7 +2,7 @@ import React from 'react';
 import { GetData } from './GetData/GetData';
 import { useState, useEffect } from "react";
 import { ShowCard } from "./show-card/ShowCard";
-import { PokemonSelector } from "./pokemon-selector/PokemonSelector";
+import { PokemonSelector } from "./PokemonSelector/PokemonSelector";
 
 export default function App() {
     const [ data, setData ] = useState([]);
