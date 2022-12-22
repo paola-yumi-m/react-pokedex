@@ -1,8 +1,9 @@
 import React from 'react';
-import { GetData } from './GetData/GetData';
+import { GetData } from '../GetData/GetData';
 import { useState, useEffect } from "react";
-import { ShowCard } from "./ShowCard/ShowCard";
-import { PokemonSelector } from "./PokemonSelector/PokemonSelector";
+import { ShowCard } from "../ShowCard/ShowCard";
+import { PokemonSelector } from "../PokemonSelector/PokemonSelector";
+import Axios from 'axios';
 
 export default function App() {
     const [ data, setData ] = useState([]);
@@ -15,23 +16,34 @@ export default function App() {
     useEffect(() => {
         const getData = async () => {
             for (let id = 1; id <= pokemonNumber; id++) {
-                try {
-                    let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error(
-                            `HTTP Error: ${response.status}`
-                        )
-                    }
-                    let actualData = await response.json();
+                let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+                await Axios.get(url).then(function (response) {
+                    let actualData = response.data;
                     setData(data => [...data, actualData]);
                     setError(null);
-                } catch (error) {
+                }).catch(function (error) {
                     setError(error);
                     setData([]);
-                } finally {
+                }).then(function () {
                     setLoading(false);
-                }
+                })
+                // try {
+                //     let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+                //     const response = await fetch(url);
+                //     if (!response.ok) {
+                //         throw new Error(
+                //             `HTTP Error: ${response.status}`
+                //         )
+                //     }
+                //     let actualData = await response.json();
+                //     setData(data => [...data, actualData]);
+                //     setError(null);
+                // } catch (error) {
+                //     setError(error);
+                //     setData([]);
+                // } finally {
+                //     setLoading(false);
+                // }
             }
         }
         getData();
