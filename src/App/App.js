@@ -27,23 +27,6 @@ export default function App() {
                 }).then(function () {
                     setLoading(false);
                 })
-                // try {
-                //     let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-                //     const response = await fetch(url);
-                //     if (!response.ok) {
-                //         throw new Error(
-                //             `HTTP Error: ${response.status}`
-                //         )
-                //     }
-                //     let actualData = await response.json();
-                //     setData(data => [...data, actualData]);
-                //     setError(null);
-                // } catch (error) {
-                //     setError(error);
-                //     setData([]);
-                // } finally {
-                //     setLoading(false);
-                // }
             }
         }
         getData();
