@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ShowCard } from "../ShowCard/ShowCard";
 import { PokemonSelector } from "../PokemonSelector/PokemonSelector";
 import Axios from 'axios';
+import axios from "axios";
 
 export default function App() {
     const [ data, setData ] = useState([]);
@@ -17,7 +18,7 @@ export default function App() {
         const getData = async () => {
             for (let id = 1; id <= pokemonNumber; id++) {
                 let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-                await Axios.get(url).then(function (response) {
+                await axios({method: 'get', url: url}).then(function (response) {
                     let actualData = response.data;
                     setData(data => [...data, actualData]);
                     setError(null);
