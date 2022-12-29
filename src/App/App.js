@@ -29,8 +29,8 @@ export default function App() {
         }
     }
 
-    useEffect(async () => {
-        await getData();
+    useEffect(() => {
+        getData();
     }, []);
 
     const getPokemonId = (pokemonId) => {
