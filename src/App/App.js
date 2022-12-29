@@ -3,7 +3,6 @@ import { GetData } from '../GetData/GetData';
 import { useState, useEffect } from "react";
 import { ShowCard } from "../ShowCard/ShowCard";
 import { PokemonSelector } from "../PokemonSelector/PokemonSelector";
-import Axios from 'axios';
 import axios from "axios";
 
 export default function App() {
@@ -14,23 +13,24 @@ export default function App() {
     const [ show, setShow ] = useState(false);
     const pokemonNumber = 10    ; //905
 
-    useEffect(() => {
-        const getData = async () => {
-            for (let id = 1; id <= pokemonNumber; id++) {
-                let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-                await axios({method: 'get', url: url}).then(function (response) {
-                    let actualData = response.data;
-                    setData(data => [...data, actualData]);
-                    setError(null);
-                }).catch(function (error) {
-                    setError(error);
-                    setData([]);
-                }).then(function () {
-                    setLoading(false);
-                })
-            }
+    async function getData() {
+        for (let id = 1; id <= pokemonNumber; id++) {
+            let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            await axios({method: 'get', url: url}).then(function (response) {
+                let actualData = response.data;
+                setData(data => [...data, actualData]);
+                setError(null);
+            }).catch(function (error) {
+                setError(error);
+                setData([]);
+            }).then(function () {
+                setLoading(false);
+            })
         }
-        getData();
+    }
+
+    useEffect(async () => {
+        await getData();
     }, []);
 
     const getPokemonId = (pokemonId) => {

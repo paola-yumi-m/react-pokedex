@@ -1,15 +1,17 @@
-import {prettyDOM, render, screen} from "@testing-library/react";
+import {prettyDOM, render, screen, waitFor} from "@testing-library/react";
 import '@testing-library/jest-dom';
 import App from "../App";
+import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
-jest.mock('axios');
+const GET_POKEMONS_URL = `https://pokeapi.co/api/v2/pokemon/1`;
 
 describe('<App />', function () {
-    axios.get.mockResolvedValueOnce({
-        data: [
-            {name: 'bulbasaur'}, {name: 'ivysaur'}
-        ]
+
+    const mockAdapter = new MockAdapter(axios);
+
+    beforeEach(() => {
+        mockAdapter.onGet(GET_POKEMONS_URL).reply(200, [{ name: "bulbasaur" }]);
     });
 
     it('should render page with title and pokemon selector', async function () {
@@ -18,12 +20,11 @@ describe('<App />', function () {
         );
 
         const h1Element = screen.getByText('My PokéDex!');
-        const combobox = await screen.findByRole('combobox');
-        console.log(prettyDOM(combobox));
-        const pokemonsSelector = combobox.options;
 
         expect(h1Element).toBeInTheDocument();
-        expect(axios.get).toHaveBeenCalled();
+        await waitFor(() => {
+              expect(mockAdapter.history.get.length).toBe(1);
+            });
         // expect(pokemonsSelector.length).toBe(11);
         // expect(pokemonsSelector[0].innerHTML).toBe('Select Pokémon');
         // expect(pokemonsSelector[1].innerHTML).toBe('bulbasaur');
