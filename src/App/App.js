@@ -5,6 +5,8 @@ import { ShowCard } from "../ShowCard/ShowCard";
 import { PokemonSelector } from "../PokemonSelector/PokemonSelector";
 import axios from "axios";
 
+let url = `https://pokeapi.co/api/v2/pokemon`;
+
 export default function App() {
     const [ data, setData ] = useState([]);
     const [ error, setError ] = useState(null);
@@ -14,19 +16,21 @@ export default function App() {
     const pokemonNumber = 10    ; //905
 
     async function getData() {
+        const pokemons = []
         for (let id = 1; id <= pokemonNumber; id++) {
-            let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-            await axios({method: 'get', url: url}).then(function (response) {
-                let actualData = response.data;
-                setData(data => [...data, actualData]);
+            try {
+                const response = await axios.get(`${url}/${id}`);
+                let actualData = response?.data;
+                pokemons.push(actualData);
                 setError(null);
-            }).catch(function (error) {
+            } catch (error) {
                 setError(error);
                 setData([]);
-            }).then(function () {
-                setLoading(false);
-            })
+            } finally {
+                 setLoading(false);
+            }
         }
+        setData(pokemons);
     }
 
     useEffect(() => {
