@@ -13,7 +13,7 @@ export default function App() {
     const [ loading, setLoading ] = useState(true);
     const [ selected, setSelected ] = useState(1);
     const [ show, setShow ] = useState(false);
-    const pokemonNumber = 10    ; //905
+    const pokemonNumber = 1    ; //905
 
     async function getData() {
         const pokemons = []
@@ -51,11 +51,20 @@ export default function App() {
     }
 
     return (
-        <div className='body'>
-            <h1>My PokéDex!</h1>
-            <PokemonSelector data={data} getPokemonId={getPokemonId} />
-            <GetData data={data} getPokemonId={getPokemonId} getTypes={getTypes} />
-            {show && selected > 0 ? <ShowCard pokemonId={selected} data={data} hideCard={hideCard} getTypes={getTypes} /> : <p></p>}
+        <div>
+            {loading?
+                <div className='body'>
+                    {error?
+                        <h1>Where did the Pokémons go???</h1>:
+                        <h1>Loading...</h1>}
+                </div>:
+                <div className='body'>
+                    <h1>My PokéDex!</h1>
+                    <PokemonSelector data={data} getPokemonId={getPokemonId} />
+                    <GetData data={data} getPokemonId={getPokemonId} getTypes={getTypes} />
+                    {show && selected > 0 ? <ShowCard pokemonId={selected} data={data} hideCard={hideCard} getTypes={getTypes} /> : <p></p>}
+                </div>
+            }
         </div>
 )
 }

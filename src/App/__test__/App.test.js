@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, waitFor } from "@testing-library/react";
+import {act, prettyDOM, render, screen, waitFor, waitForElementToBeRemoved} from "@testing-library/react";
 import axios from "axios";
 import App from "../App";
 
@@ -50,9 +50,14 @@ describe("<App />", () => {
 
         render(<App />);
 
+
+        console.log(prettyDOM(screen.queryByText('Loading...')))
         await waitFor(() => {
             expect(axios.get).toHaveBeenCalledWith(GET_POKEMONS_URL);
         });
+        await waitForElementToBeRemoved(() =>
+            screen.queryByText("Loading...")
+        );
 
         // const h1Element = screen.getByText('My PokéDex!');
         //
