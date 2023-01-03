@@ -6,7 +6,7 @@ import App from "../App";
 jest.mock("axios");
 
 const GET_POKEMONS_URL = `https://pokeapi.co/api/v2/pokemon/1`;
-const pokemons = [
+const pokemon =
     {
         id: 1,
         name: "bulbasaur",
@@ -41,30 +41,40 @@ const pokemons = [
                 },
             },
         },
-    },
-];
+    };
 
 describe("<App />", () => {
     it("should render page with title and pokemon selector", async function () {
-        axios.get.mockResolvedValueOnce({ data: pokemons });
+        axios.get.mockResolvedValueOnce({ data: pokemon });
 
         render(<App />);
 
-
-        console.log(prettyDOM(screen.queryByText('Loading...')))
         await waitFor(() => {
             expect(axios.get).toHaveBeenCalledWith(GET_POKEMONS_URL);
         });
-        await waitForElementToBeRemoved(() =>
-            screen.queryByText("Loading...")
-        );
+        await waitFor(() => expect(screen.queryByText('Loading...')).not.toBeInTheDocument());
+        expect(screen.queryByText('Where did the Pokémons go??')).not.toBeInTheDocument();
+        const h1Element = screen.getByText('My PokéDex!');
+        expect(h1Element).toBeInTheDocument();
+        const pokemonsSelector = screen.getByRole('combobox');
+        expect(pokemonsSelector.length).toBe(2);
+        expect(pokemonsSelector[0].innerHTML).toBe('Select Pokémon');
+        expect(pokemonsSelector[1].innerHTML).toBe('bulbasaur');
+    });
 
-        // const h1Element = screen.getByText('My PokéDex!');
-        //
-        // expect(h1Element).toBeInTheDocument();
-        // expect(pokemonsSelector.length).toBe(11);
-        // expect(pokemonsSelector[0].innerHTML).toBe('Select Pokémon');
-        // expect(pokemonsSelector[1].innerHTML).toBe('bulbasaur');
-        // expect(pokemonsSelector[-1].innerHTML).toBe('caterpie');
+    it('should render error message when get fails', async function () {
+        axios.get.mockRejectedValueOnce(new Error('Not found'));
+
+        render(<App/>);
+
+        await waitFor(() => {
+            expect(axios.get).toHaveBeenCalledWith(GET_POKEMONS_URL);
+        });
+        await waitFor(() => expect(screen.queryByText('Loading...')).not.toBeInTheDocument());
+        expect(screen.getByText('Where did the Pokémons go???')).toBeInTheDocument();
+        const h1Element = screen.queryByText('My PokéDex!');
+        expect(h1Element).not.toBeInTheDocument();
+        const pokemonsSelector = screen.queryByRole('combobox');
+        expect(pokemonsSelector).not.toBeInTheDocument();
     });
 });
