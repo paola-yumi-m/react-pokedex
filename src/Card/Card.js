@@ -7,7 +7,7 @@ export const Card = ({ pokemonSrc, pokemon, getPokemonId, getTypes }) => {
     }
 
     return (
-        <div className='card' onClick={handleClick} id={pokemon.id} >
+        <div className='card' onClick={handleClick} id={pokemon.id} data-testid='pokemon-card' >
             <div className='img-container' >
                 {pokemonSrc ? <img src={pokemonSrc} className='img' alt='a pokemon' /> : <div className='no-img'><p>?</p></div>}
             </div>
