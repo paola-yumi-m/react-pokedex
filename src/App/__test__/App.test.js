@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import {act, prettyDOM, render, screen, waitFor, waitForElementToBeRemoved} from "@testing-library/react";
 import axios from "axios";
 import App from "../App";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("axios");
 
@@ -76,5 +77,35 @@ describe("<App />", () => {
         expect(h1Element).not.toBeInTheDocument();
         const pokemonsSelector = screen.queryByRole('combobox');
         expect(pokemonsSelector).not.toBeInTheDocument();
+    });
+
+    it('should show individual card when card is clicked', async function () {
+        axios.get.mockResolvedValueOnce({data: pokemon});
+
+        render(<App/>);
+
+        const card = await screen.findByTestId('pokemon-card');
+        userEvent.click(card);
+        const heightInfo = screen.getByText('Height: 7');
+
+        expect(heightInfo).toBeInTheDocument();
+    });
+
+    it('should close card when X button is clicked', async function () {
+        axios.get.mockResolvedValueOnce({data: pokemon});
+
+        render(<App/>);
+
+        const card = await screen.findByTestId('pokemon-card');
+        userEvent.click(card);
+        const heightInfoBeforeClick = screen.getByText('Height: 7');
+
+        expect(heightInfoBeforeClick).toBeInTheDocument();
+
+        const closeButton = screen.getByRole('button', { name: 'X' });
+        userEvent.click(closeButton);
+        const heightInfoAfterClick = screen.queryByText('Height: 7');
+
+        expect(heightInfoAfterClick).not.toBeInTheDocument();
     });
 });
