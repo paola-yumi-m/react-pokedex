@@ -27,7 +27,6 @@ describe('<PokemonSelector />', function () {
 
         const selectBox = screen.getByRole('combobox');
         const options = selectBox.options;
-        console.log(prettyDOM(selectBox));
 
         expect(options[0].innerHTML).toBe('Select Pokémon');
         expect(options[1].innerHTML).toBe('bulbasaur');
