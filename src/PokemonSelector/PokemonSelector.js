@@ -2,7 +2,7 @@ import React from "react";
 
 export const PokemonSelector = ({ data, getPokemonId }) => {
     function getPokemons() {
-        return data.map((pokemon, key) => <option key={key} value={pokemon.id}>{pokemon.name}</option>);
+        return data.map((pokemon, key) => <option key={key} value={pokemon.pokemonId}>{pokemon.name}</option>);
     }
 
     function handleSelect(e) {

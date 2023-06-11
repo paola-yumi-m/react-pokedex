@@ -5,7 +5,7 @@ import { ShowCard } from "../ShowCard/ShowCard";
 import { PokemonSelector } from "../PokemonSelector/PokemonSelector";
 import axios from "axios";
 
-let url = `https://pokeapi.co/api/v2/pokemon`;
+let url = `http://localhost:8080/api/v1/pokemons`;
 
 export default function App() {
     const [ data, setData ] = useState([]);
@@ -13,7 +13,7 @@ export default function App() {
     const [ loading, setLoading ] = useState(true);
     const [ selected, setSelected ] = useState(1);
     const [ show, setShow ] = useState(false);
-    const pokemonNumber = 1    ; //905
+    const pokemonNumber = 10   ; //905
 
     async function getData() {
         const pokemons = []
@@ -31,6 +31,7 @@ export default function App() {
             }
         }
         setData(pokemons);
+        console.log(pokemons);
     }
 
     useEffect(() => {
