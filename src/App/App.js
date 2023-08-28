@@ -3,9 +3,7 @@ import { GetData } from '../GetData/GetData';
 import { useState, useEffect } from 'react';
 import { ShowCard } from '../ShowCard/ShowCard';
 import { PokemonSelector } from '../PokemonSelector/PokemonSelector';
-import axios from 'axios';
-
-let url = `http://localhost:8080/api/v1/pokemons`;
+import getDataFromApi from './getDataFromApi';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -14,29 +12,9 @@ export default function App() {
   const [selected, setSelected] = useState(1);
   const [show, setShow] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState('0');
-  const pokemonNumber = 10; //905
-
-  async function getData() {
-    const pokemons = [];
-    for (let id = 1; id <= pokemonNumber; id++) {
-      try {
-        const response = await axios.get(`${url}/${id}`);
-        let actualData = response?.data;
-        pokemons.push(actualData);
-        setError(null);
-      } catch (error) {
-        setError(error);
-        setData([]);
-      } finally {
-        setLoading(false);
-      }
-    }
-    setData(pokemons);
-    console.log(pokemons);
-  }
 
   useEffect(() => {
-    getData();
+    getDataFromApi(setError, setData, setLoading);
   }, []);
 
   const getPokemonId = (pokemonId) => {
