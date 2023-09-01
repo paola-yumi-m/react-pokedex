@@ -3,7 +3,7 @@ import { GetData } from '../GetData/GetData';
 import { useState, useEffect } from 'react';
 import { ShowCard } from '../ShowCard/ShowCard';
 import { PokemonSelector } from '../PokemonSelector/PokemonSelector';
-import getDataFromApi from './getDataFromApi';
+import { getData } from './GetDataFromApi';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -14,7 +14,7 @@ export default function App() {
   const [selectedPokemon, setSelectedPokemon] = useState('0');
 
   useEffect(() => {
-    getDataFromApi(setError, setData, setLoading);
+    getData(setError, setData, setLoading);
   }, []);
 
   const getPokemonId = (pokemonId) => {

@@ -8,12 +8,12 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import axios from 'axios';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-import getDataFromApi from '../getDataFromApi';
+import axios from 'axios';
 
-jest.mock('getDataFromApi');
+jest.mock('axios');
+const getPokemonNumber = require('../GetPokemonNumber');
 
 const GET_POKEMONS_URL = `http://localhost:8080/api/v1/pokemons/1`;
 const pokemon = {
@@ -50,9 +50,13 @@ const pokemon = {
   },
 };
 
+beforeEach(() => {
+  jest.spyOn(getPokemonNumber, 'getPokemonNumber').mockReturnValue(1);
+});
+
 describe('<App />', () => {
   it('should render page with title and pokemon selector', async function () {
-    getDataFromApi.mockResolvedValueOnce([{ data: pokemon }]);
+    axios.get.mockResolvedValueOnce({ data: pokemon });
 
     render(<App />);
 
