@@ -1,58 +1,47 @@
 import '@testing-library/jest-dom';
-import {
-  act,
-  fireEvent,
-  prettyDOM,
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 
 jest.mock('axios');
-const getPokemonNumber = require('../GetPokemonNumber');
 
-const GET_POKEMONS_URL = `http://localhost:8080/api/v1/pokemons/1`;
-const pokemon = {
-  pokemonId: 1,
-  name: 'bulbasaur',
-  weight: 69,
-  height: 7,
-  types: [
-    {
-      type: { name: 'poison' },
-    },
-    {
-      type: { name: 'grass' },
-    },
-  ],
-  abilities: [
-    {
-      ability: {
-        name: 'overgrow',
+const GET_POKEMONS_URL = `http://localhost:8080/api/v1/pokemons`;
+const pokemon = [
+  {
+    pokemonId: 1,
+    name: 'bulbasaur',
+    weight: 69,
+    height: 7,
+    types: [
+      {
+        type: { name: 'poison' },
       },
-    },
-    {
-      ability: {
-        name: 'chlorophyll',
+      {
+        type: { name: 'grass' },
       },
-    },
-  ],
-  sprites: {
-    other: {
-      home: {
-        front_default: 'image',
+    ],
+    abilities: [
+      {
+        ability: {
+          name: 'overgrow',
+        },
+      },
+      {
+        ability: {
+          name: 'chlorophyll',
+        },
+      },
+    ],
+    sprites: {
+      other: {
+        home: {
+          front_default: 'image',
+        },
       },
     },
   },
-};
-
-beforeEach(() => {
-  jest.spyOn(getPokemonNumber, 'getPokemonNumber').mockReturnValue(1);
-});
+];
 
 describe('<App />', () => {
   it('should render page with title and pokemon selector', async function () {
