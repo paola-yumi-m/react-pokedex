@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ShowCard } from '../ShowCard/ShowCard';
 import { PokemonSelector } from '../PokemonSelector/PokemonSelector';
 import { getData } from './GetDataFromApi';
+import { SearchBox } from '../SearchBox/SearchBox';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -49,12 +50,15 @@ export default function App() {
       ) : (
         <div className='body'>
           <h1>My PokéDex!</h1>
-          <PokemonSelector
-            data={data}
-            getPokemonId={getPokemonId}
-            selectedPokemon={selectedPokemon}
-            setSelectedPokemon={setSelectedPokemon}
-          />
+          <div className='header'>
+            <PokemonSelector
+              data={data}
+              getPokemonId={getPokemonId}
+              selectedPokemon={selectedPokemon}
+              setSelectedPokemon={setSelectedPokemon}
+            />
+            <SearchBox />
+          </div>
           <GetData
             data={data}
             getPokemonId={getPokemonId}
