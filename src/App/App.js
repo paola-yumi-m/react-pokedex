@@ -5,7 +5,6 @@ import { ShowCard } from '../ShowCard/ShowCard';
 import { PokemonSelector } from '../PokemonSelector/PokemonSelector';
 import { getData } from './GetDataFromApi';
 import { SearchBox } from '../SearchBox/SearchBox';
-import { PokemonsByName } from '../PokemonsByName/PokemonsByName';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -17,7 +16,6 @@ export default function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [isSearchByName, setIsSearchByName] = useState(true);
 
-  console.log(pokemonList);
   useEffect(() => {
     getData(setError, setData, setLoading);
   }, []);
@@ -71,9 +69,10 @@ export default function App() {
           </div>
           <div className='body'>
             {isSearchByName ? (
-              <PokemonsByName
-                data={data}
-                pokemonList={pokemonList}
+              <GetData
+                data={pokemonList}
+                getPokemonId={getPokemonId}
+                getTypes={getTypes}
               />
             ) : (
               <GetData
