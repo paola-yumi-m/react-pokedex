@@ -1,3 +1,7 @@
+#root {
+  width: 100%;
+}
+
 body {
   text-align: center;
   background: yellow;
@@ -175,7 +179,7 @@ h1 {
   margin: 10px;
 }
 
-.header {
+.sub-header {
   display: flex;
   justify-content: space-between;
   justify-items: center;
@@ -184,6 +188,5 @@ h1 {
 
 .search-box {
   display: flex;
-  justify-content: center;
-  justify-items: end;
+  align-items: center;
 }

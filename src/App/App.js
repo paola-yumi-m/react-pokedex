@@ -5,6 +5,7 @@ import { ShowCard } from '../ShowCard/ShowCard';
 import { PokemonSelector } from '../PokemonSelector/PokemonSelector';
 import { getData } from './GetDataFromApi';
 import { SearchBox } from '../SearchBox/SearchBox';
+import { PokemonsByName } from '../PokemonsByName/PokemonsByName';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -13,7 +14,10 @@ export default function App() {
   const [selected, setSelected] = useState(1);
   const [show, setShow] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState('0');
+  const [pokemonList, setPokemonList] = useState([]);
+  const [isSearchByName, setIsSearchByName] = useState(true);
 
+  console.log(pokemonList);
   useEffect(() => {
     getData(setError, setData, setLoading);
   }, []);
@@ -44,26 +48,41 @@ export default function App() {
       {error ? (
         <h1>Where did the Pokémons go???</h1>
       ) : loading ? (
-        <div className='body'>
+        <div>
           <h1>Loading...</h1>
         </div>
       ) : (
-        <div className='body'>
-          <h1>My PokéDex!</h1>
-          <div className='header'>
-            <PokemonSelector
-              data={data}
-              getPokemonId={getPokemonId}
-              selectedPokemon={selectedPokemon}
-              setSelectedPokemon={setSelectedPokemon}
-            />
-            <SearchBox />
+        <>
+          <div>
+            <h1>My PokéDex!</h1>
+            <div className='sub-header'>
+              <PokemonSelector
+                data={data}
+                getPokemonId={getPokemonId}
+                selectedPokemon={selectedPokemon}
+                setSelectedPokemon={setSelectedPokemon}
+              />
+              <SearchBox
+                setPokemonList={setPokemonList}
+                setError={setError}
+                setIsSearchByName={setIsSearchByName}
+              />
+            </div>
           </div>
-          <GetData
-            data={data}
-            getPokemonId={getPokemonId}
-            getTypes={getTypes}
-          />
+          <div className='body'>
+            {isSearchByName ? (
+              <PokemonsByName
+                data={data}
+                pokemonList={pokemonList}
+              />
+            ) : (
+              <GetData
+                data={data}
+                getPokemonId={getPokemonId}
+                getTypes={getTypes}
+              />
+            )}
+          </div>
           {show && selected > 0 ? (
             <ShowCard
               pokemonId={selected}
@@ -74,7 +93,7 @@ export default function App() {
           ) : (
             <p></p>
           )}
-        </div>
+        </>
       )}
     </div>
   );
